@@ -1,0 +1,126 @@
+
+
+body{
+    background-color: indigo;
+}
+
+#container{
+    height: 100%;
+    width: 100%;
+    
+}
+
+
+/* buttons */
+
+#circle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container-items{
+    width: 550px;
+    height: 550px;
+    background-color: ivory;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid;
+    margin-top:15px ;
+    padding-top: 30px;
+}
+
+
+
+ /*  quarter redius shapes : referenced from
+  https://stackoverflow.com/questions/16263358/quarter-of-a-ring-with-css-and-html */
+
+.top-left {    
+    height: 200px;
+    width: 200px;
+    border-radius: 200px 0 0 0;
+    background: green;
+    border: 7px solid;
+    margin-right: 1px;
+    margin-bottom: 1px;
+  }
+
+
+.top-right{
+    height: 200px;
+    width: 200px;
+    border-radius: 0 200px 0 0;
+    background: red;
+    border: 7px solid;
+    margin-left: 1px;
+    transform: rotate(180deg);
+    margin-bottom: 1px;
+}
+  
+
+.bottom-left{
+
+    height: 200px;
+    width: 200px;
+    border-radius: 0 0 0 200px;
+    background: yellow;
+    border: 7px solid;
+    margin-right:1px;
+    margin-top: 1px;
+    transform: rotate(180deg);
+}
+
+.bottom-right{
+    
+    height: 200px;
+    width: 200px;
+    border-radius: 0 0 200px 0;
+    background: blue;
+    border: 7px solid;
+    margin-left: 1px;
+    margin-top: 1px;
+}
+
+
+.small-circle{
+    width: 80px;
+    height:80px;
+    position: absolute;
+    background:rgb(44, 42, 42);
+    border-radius: 50%;
+    border: 7px solid;
+    z-index: 2;
+}
+/* 
+.small-circle-play{
+    width: 80px;
+    height:80px;
+    position: absolute;
+    background:rgb(231, 29, 29);
+    border-radius: 50%;
+    border: 7px solid;
+    z-index: 2;
+} */
+
+
+.play{
+    color: ivory;
+    text-align: center;
+    margin-top: 30px;
+    /* animation: play 2s infinite linear; */
+}
+
+.play{
+    color: ivory;
+    text-align: center;
+    margin-top: 30px;
+    /* animation: play 2s infinite linear; */
+}
+
+/* @keyframes play {
+    to {
+      transform: rotate(180deg);
+    }
+  } */
