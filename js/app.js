@@ -19,9 +19,13 @@ $(() => {
                 return random
             },
             startSeq: () => {
-                let randomButton = gameStuff.buttonArray[gameStuff.gameFunctions.createRandom()]
-                gameStuff.gameFunctions.seqEffect(randomButton);
-                gameStuff.gameSeqArray.push(randomButton)
+                setTimeout(() => {
+                    let randomButton = gameStuff.buttonArray[gameStuff.gameFunctions.createRandom()]
+                    gameStuff.gameFunctions.seqEffect(randomButton);
+                    gameStuff.gameSeqArray.push(randomButton)
+                }, 1000)
+
+
             },
             makeNewSeq: () => {
                 // if game is on 
@@ -46,9 +50,34 @@ $(() => {
         $(".small-circle").removeClass().addClass("small-circle-play");
         $(".play").eq(0)[0].innerHTML = round
         if (gameStart) {
-            gameStart.gameFunctions.startSeq()
+            gameStuff.gameFunctions.startSeq();
+            // implement a wait time for user move
+
         }
     })
 
-
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+// progressBar: () => {
+//     var time = 10; // reference from  http://vaidehijoshi.github.io/blog/2015/01/06/the-final-countdown-using-javascripts-setinterval-plus-clearinterval-methods/
+//     setInterval(function () {
+//         $(".play").eq(0)[0].innerHTML = time;
+//         time--
+//         if (time === 0) {
+//             console.log("Game is Over!!")
+//             $("body").css("background-color");
+//         }
+//     }, 1000);
+// }
