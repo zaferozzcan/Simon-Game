@@ -36,5 +36,19 @@ $(() => {
     }
 
 
+    let gameStart = false;
+    let round = 1;
+    let isGameOver = false;
+
+    // START GAME
+    $((".play")).on("click", () => {
+        gameStart = true
+        $(".small-circle").removeClass().addClass("small-circle-play");
+        $(".play").eq(0)[0].innerHTML = round
+        if (gameStart) {
+            gameStart.gameFunctions.startSeq()
+        }
+    })
+
 
 });
