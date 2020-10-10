@@ -7,9 +7,10 @@ $(() => {
 
     let gameStuff = {
         gameFunctions: {
-            buttonClick: (e) => {
+            userClick: (e) => {
                 $(e.target).fadeOut(100).fadeIn(100);
-                gameStuff.userGuessSeq.push($(e.target))
+                gameStuff.userGuessSeq.push($(e.target).eq(0)[0].classList[1])
+                console.log("userGuessSeq", gameStuff.userGuessSeq)
             },
             seqEffect: (button) => {
                 $(button).fadeOut(100).fadeIn(100);
@@ -23,8 +24,8 @@ $(() => {
                     let randomButton = gameStuff.buttonArray[gameStuff.gameFunctions.createRandom()]
                     gameStuff.gameFunctions.seqEffect(randomButton);
                     gameStuff.gameSeqArray.push(randomButton)
+                    console.log("gameSeqArray", gameStuff.gameSeqArray);
                 }, 1000)
-
 
             },
             makeNewSeq: () => {
@@ -51,14 +52,14 @@ $(() => {
         $(".play").eq(0)[0].innerHTML = round
         if (gameStart) {
             gameStuff.gameFunctions.startSeq();
-            // implement a wait time for user move
+            console.log(gameStuff.gameSeqArray);
+            // here implement a wait time for user move
+            $(".button").on("click", gameStuff.gameFunctions.userClick);
 
         }
     })
 
 });
-
-
 
 
 
