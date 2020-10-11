@@ -35,11 +35,15 @@ $(() => {
                 gameStuff.gameSeqArray.push(randomButton)
             },
             isGameOver: () => {
-                if (gameFunctions.userGuessSeq === gameFunctions.gameSeqArray) {
-                    for (var i = 0; i < gameFunctions.userGuessSeq.lenght - 1; i++) {
-                        gameStuff.round++;
-                        $(".play").eq(0)[0].innerHTML = gameStuff.round;
-                        makeNewSeq();
+                if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.len) {
+                    for (var i = 0; i < gameStuff.userGuessSeq.length - 1; i++) {
+                        if (gameStuff.userGuessSeq[i] === gameStuff.userGuessSeq[i]) {
+                            gameStuff.round++;
+                            console.log();
+                            $(".play").eq(0)[0].innerHTML = gameStuff.round;
+                            makeNewSeq();
+                        }
+
                     }
                 }
             }
@@ -58,7 +62,7 @@ $(() => {
     $((".play")).on("click", () => {
         gameStart = true
         $(".small-circle").removeClass().addClass("small-circle-play");
-        $(".play").eq(0)[0].innerHTML = gameFunctions.round
+        $(".play").eq(0)[0].innerHTML = gameStuff.round
         if (gameStart) {
             gameStuff.gameFunctions.startSeq();
             console.log(gameStuff.gameSeqArray);
@@ -67,6 +71,10 @@ $(() => {
             gameStuff.gameFunctions.isGameOver()
         }
     })
+
+
+
+    // end jq ready method\\
 });
 
 
