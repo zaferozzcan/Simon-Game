@@ -33,33 +33,48 @@ $(() => {
                 let randomButton = gameStuff.buttonArray[gameStuff.gameFunctions.createRandom()]
                 gameStuff.gameFunctions.seqEffect(randomButton);
                 gameStuff.gameSeqArray.push(randomButton)
+            },
+            isGameOver: () => {
+                if (gameFunctions.userGuessSeq === gameFunctions.gameSeqArray) {
+                    for (var i = 0; i < gameFunctions.userGuessSeq.lenght - 1; i++) {
+                        gameStuff.round++;
+                        $(".play").eq(0)[0].innerHTML = gameStuff.round;
+                        makeNewSeq();
+                    }
+                }
             }
         },
         buttonArray: [".top-right", ".top-left", ".bottom-left", ".bottom-right"],
         gameSeqArray: [],
-        userGuessSeq: []
+        userGuessSeq: [],
+        round: 1
     }
 
 
     let gameStart = false;
-    let round = 1;
     let isGameOver = false;
 
     // START GAME
     $((".play")).on("click", () => {
         gameStart = true
         $(".small-circle").removeClass().addClass("small-circle-play");
-        $(".play").eq(0)[0].innerHTML = round
+        $(".play").eq(0)[0].innerHTML = gameFunctions.round
         if (gameStart) {
             gameStuff.gameFunctions.startSeq();
             console.log(gameStuff.gameSeqArray);
             // here implement a wait time for user move
             $(".button").on("click", gameStuff.gameFunctions.userClick);
-
+            gameStuff.gameFunctions.isGameOver()
         }
     })
-
 });
+
+
+
+
+
+
+
 
 
 
