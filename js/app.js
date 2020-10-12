@@ -57,6 +57,9 @@ $(() => {
                     gameStuff.gameFunctions.makeNewSeq()
                 } else {
                     console.log("game over");
+                    $("#circle").remove()
+                    $("#container").prepend(`<img  class="game-over" src="./images/download.png">`)
+
                 }
 
                 // }
