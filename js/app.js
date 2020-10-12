@@ -2,7 +2,6 @@
 // console.log(typeof $());
 
 
-
 $(() => {
 
     let gameStuff = {
@@ -11,18 +10,19 @@ $(() => {
                 $(e.target).fadeOut(100).fadeIn(100);
                 gameStuff.userGuessSeq.push($(e.target).eq(0)[0].classList[1])
                 console.log("user move array", gameStuff.userGuessSeq)
-                if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
-                    gameStuff.gameFunctions.isGameOver() //checking is game over
-                }
+                // if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
+                //     gameStuff.gameFunctions.isGameOver() //checking is game over
+                // }
+                gameStuff.gameFunctions.isGameOver()
             },
             seqEffect: (button) => {
-                $(button).fadeOut(100).fadeIn(100);
+                $(button).fadeOut(100).fadeIn(100); //referenced from https://stackoverflow.com/questions/16344354/how-to-make-blinking-flashing-text-with-css-3
             },
             createRandom: () => {
                 let random = Math.floor(Math.random() * 4)
                 return random
             },
-            startSeq: () => {
+            startGame: () => {
                 setTimeout(() => {
                     console.log("game starts");
                     console.log(`round:${round}`);
@@ -43,27 +43,23 @@ $(() => {
                     gameStuff.gameFunctions.seqEffect(`.${randomButton}`);
                     gameStuff.gameSeqArray.push(randomButton)
                     console.log("random sequence", gameStuff.gameSeqArray);
-                    $(".button").on("click", gameStuff.gameFunctions.userClick);//  user move / click
-
+                    // $(".button").on("click", gameStuff.gameFunctions.userClick);//  user move / click
+                    gameStuff.userGuessSeq.length = 0
                 }, 2000)
 
             },
             isGameOver: () => {
                 console.log("In isGameOver");
-
-                if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
-                    for (var i = 0; i < gameStuff.userGuessSeq.length; i++) {
-                        if (gameStuff.userGuessSeq[i] === gameStuff.gameSeqArray[i]) {
-                            // console.log(`sequence ${i} is a match`);
-                        } else {
-                            console.log("Game Over");
-                            return
-                        }
-                    }
+                if (gameStuff.userGuessSeq[round - 1] === gameStuff.gameSeqArray[round - 1]) {
+                    console.log("the last added is a match");
                     round++;
                     $(".button-play").eq(0)[0].innerHTML = round;
                     gameStuff.gameFunctions.makeNewSeq()
+                } else {
+                    console.log("game over");
                 }
+
+                // }
             }
         },
         buttonArray: ["top-right", "top-left", "bottom-left", "bottom-right"],
@@ -82,7 +78,7 @@ $(() => {
         $(".small-circle").removeClass().addClass("small-circle-play");
         $(".button-play").eq(0)[0].innerHTML = round
         if (gameStart) {
-            gameStuff.gameFunctions.startSeq();//user see seq
+            gameStuff.gameFunctions.startGame();//user see seq
             // console.log("gameSeq array", gameStuff.gameSeqArray);
         }
     });
