@@ -11,6 +11,7 @@ $(() => {
                 $(e.target).fadeOut(100).fadeIn(100);
                 gameStuff.userGuessSeq.push($(e.target).eq(0)[0].classList[1])
                 console.log("userGuessSeq", gameStuff.userGuessSeq)
+                gameStuff.gameFunctions.isGameOver()
             },
             seqEffect: (button) => {
                 $(button).fadeOut(100).fadeIn(100);
@@ -22,7 +23,7 @@ $(() => {
             startSeq: () => {
                 setTimeout(() => {
                     let randomButton = gameStuff.buttonArray[gameStuff.gameFunctions.createRandom()]
-                    gameStuff.gameFunctions.seqEffect(randomButton);
+                    gameStuff.gameFunctions.seqEffect(`.${randomButton}`);
                     gameStuff.gameSeqArray.push(randomButton)
                     console.log("gameSeqArray", gameStuff.gameSeqArray);
                 }, 1000)
@@ -35,42 +36,49 @@ $(() => {
                 gameStuff.gameSeqArray.push(randomButton)
             },
             isGameOver: () => {
-                if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.len) {
-                    for (var i = 0; i < gameStuff.userGuessSeq.length - 1; i++) {
+                console.log("I am checking isGameOver.");
+                console.log("gameStuff.userGuessSeq.length", gameStuff.userGuessSeq.length);
+                console.log("gameStuff.gameSeqArray.length", gameStuff.gameSeqArray.length);
+                if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
+                    for (var i = 0; i < gameStuff.userGuessSeq.length; i++) {
                         if (gameStuff.userGuessSeq[i] === gameStuff.userGuessSeq[i]) {
-                            gameStuff.round++;
+                            round++;
+                            console.log(`${i} seq is equal`);
                             console.log();
-                            $(".play").eq(0)[0].innerHTML = gameStuff.round;
-                            makeNewSeq();
+                            $(".play").eq(0)[0].innerHTML = round;
+                            gameStuff.gameFunctions.makeNewSeq()
+                        } else {
+                            console.log(`geme is over!`);
                         }
 
                     }
                 }
             }
         },
-        buttonArray: [".top-right", ".top-left", ".bottom-left", ".bottom-right"],
+        buttonArray: ["top-right", "top-left", "bottom-left", "bottom-right"],
         gameSeqArray: [],
         userGuessSeq: [],
-        round: 1
+
     }
 
 
     let gameStart = false;
     let isGameOver = false;
+    let round = 1
 
     // START GAME
     $((".play")).on("click", () => {
         gameStart = true
         $(".small-circle").removeClass().addClass("small-circle-play");
-        $(".play").eq(0)[0].innerHTML = gameStuff.round
+        $(".play").eq(0)[0].innerHTML = round
         if (gameStart) {
-            gameStuff.gameFunctions.startSeq();
-            console.log(gameStuff.gameSeqArray);
-            // here implement a wait time for user move
-            $(".button").on("click", gameStuff.gameFunctions.userClick);
-            gameStuff.gameFunctions.isGameOver()
+            gameStuff.gameFunctions.startSeq();//user see seq
+            console.log("gameSeq array", gameStuff.gameSeqArray);
+            // here implement a wait time limit for user move
+            $(".button").on("click", gameStuff.gameFunctions.userClick);//user guess seq
+
         }
-    })
+    });
 
 
 
