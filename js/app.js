@@ -10,8 +10,8 @@ $(() => {
             userClick: (e) => {
                 $(e.target).fadeOut(100).fadeIn(100);
                 gameStuff.userGuessSeq.push($(e.target).eq(0)[0].classList[1])
-                console.log("userGuessSeq", gameStuff.userGuessSeq)
-                gameStuff.gameFunctions.isGameOver()
+                console.log("user move", gameStuff.userGuessSeq)
+                gameStuff.gameFunctions.isGameOver() //checking is game over
             },
             seqEffect: (button) => {
                 $(button).fadeOut(100).fadeIn(100);
@@ -22,36 +22,44 @@ $(() => {
             },
             startSeq: () => {
                 setTimeout(() => {
+                    console.log("game starts");
+                    console.log(`round:${round}`);
                     let randomButton = gameStuff.buttonArray[gameStuff.gameFunctions.createRandom()]
                     gameStuff.gameFunctions.seqEffect(`.${randomButton}`);
                     gameStuff.gameSeqArray.push(randomButton)
-                    console.log("gameSeqArray", gameStuff.gameSeqArray);
-                }, 1000)
+                    console.log("random sequence", gameStuff.gameSeqArray);
+                    $(".button").on("click", gameStuff.gameFunctions.userClick);//  user move / click
+                }, 2000)
 
             },
             makeNewSeq: () => {
                 // if game is on 
-                let randomButton = gameStuff.buttonArray[gameStuff.gameFunctions.createRandom()]
-                gameStuff.gameFunctions.seqEffect(randomButton);
-                gameStuff.gameSeqArray.push(randomButton)
+                setTimeout(() => {
+                    console.log(`Making new sequence in round  ${round}`);
+                    let randomButton = gameStuff.buttonArray[gameStuff.gameFunctions.createRandom()]
+                    gameStuff.gameFunctions.seqEffect(`.${randomButton}`);
+                    gameStuff.gameSeqArray.push(randomButton)
+                    console.log("random sequence", gameStuff.gameSeqArray);
+                    $(".button").on("click", gameStuff.gameFunctions.userClick);//  user move / click
+
+                }, 2000)
+
             },
             isGameOver: () => {
-                console.log("I am checking isGameOver.");
-                console.log("gameStuff.userGuessSeq.length", gameStuff.userGuessSeq.length);
-                console.log("gameStuff.gameSeqArray.length", gameStuff.gameSeqArray.length);
+                console.log("In isGameOver");
+
                 if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
                     for (var i = 0; i < gameStuff.userGuessSeq.length; i++) {
-                        if (gameStuff.userGuessSeq[i] === gameStuff.userGuessSeq[i]) {
-                            round++;
-                            console.log(`${i} seq is equal`);
-                            console.log();
-                            $(".play").eq(0)[0].innerHTML = round;
-                            gameStuff.gameFunctions.makeNewSeq()
+                        if (gameStuff.userGuessSeq[i] === gameStuff.gameSeqArray[i]) {
+                            console.log(`sequence ${i} is a match`);
                         } else {
-                            console.log(`geme is over!`);
+                            console.log("Game Over");
+                            return
                         }
-
                     }
+                    round++;
+                    $(".play").eq(0)[0].innerHTML = round;
+                    gameStuff.gameFunctions.makeNewSeq()
                 }
             }
         },
@@ -73,10 +81,7 @@ $(() => {
         $(".play").eq(0)[0].innerHTML = round
         if (gameStart) {
             gameStuff.gameFunctions.startSeq();//user see seq
-            console.log("gameSeq array", gameStuff.gameSeqArray);
-            // here implement a wait time limit for user move
-            $(".button").on("click", gameStuff.gameFunctions.userClick);//user guess seq
-
+            // console.log("gameSeq array", gameStuff.gameSeqArray);
         }
     });
 
