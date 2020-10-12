@@ -10,8 +10,10 @@ $(() => {
             userClick: (e) => {
                 $(e.target).fadeOut(100).fadeIn(100);
                 gameStuff.userGuessSeq.push($(e.target).eq(0)[0].classList[1])
-                console.log("user move", gameStuff.userGuessSeq)
-                gameStuff.gameFunctions.isGameOver() //checking is game over
+                console.log("user move array", gameStuff.userGuessSeq)
+                if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
+                    gameStuff.gameFunctions.isGameOver() //checking is game over
+                }
             },
             seqEffect: (button) => {
                 $(button).fadeOut(100).fadeIn(100);
@@ -29,6 +31,7 @@ $(() => {
                     gameStuff.gameSeqArray.push(randomButton)
                     console.log("random sequence", gameStuff.gameSeqArray);
                     $(".button").on("click", gameStuff.gameFunctions.userClick);//  user move / click
+                    /// after 
                 }, 2000)
 
             },
@@ -51,14 +54,14 @@ $(() => {
                 if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
                     for (var i = 0; i < gameStuff.userGuessSeq.length; i++) {
                         if (gameStuff.userGuessSeq[i] === gameStuff.gameSeqArray[i]) {
-                            console.log(`sequence ${i} is a match`);
+                            // console.log(`sequence ${i} is a match`);
                         } else {
                             console.log("Game Over");
                             return
                         }
                     }
                     round++;
-                    $(".play").eq(0)[0].innerHTML = round;
+                    $(".button-play").eq(0)[0].innerHTML = round;
                     gameStuff.gameFunctions.makeNewSeq()
                 }
             }
@@ -66,7 +69,6 @@ $(() => {
         buttonArray: ["top-right", "top-left", "bottom-left", "bottom-right"],
         gameSeqArray: [],
         userGuessSeq: [],
-
     }
 
 
@@ -75,10 +77,10 @@ $(() => {
     let round = 1
 
     // START GAME
-    $((".play")).on("click", () => {
+    $((".button-play")).on("click", () => {
         gameStart = true
         $(".small-circle").removeClass().addClass("small-circle-play");
-        $(".play").eq(0)[0].innerHTML = round
+        $(".button-play").eq(0)[0].innerHTML = round
         if (gameStart) {
             gameStuff.gameFunctions.startSeq();//user see seq
             // console.log("gameSeq array", gameStuff.gameSeqArray);
