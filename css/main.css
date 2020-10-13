@@ -131,3 +131,21 @@ body{
     width: 50%;
    
   }
+
+  progress{
+      display:flex;
+      width: 550px;
+      margin: 0 auto 0 auto;
+  }
+
+  .progress-show{
+    display: inline-block;
+  }
+  
+  .progress-container{
+      background-color: ivory;
+      width: 550px;
+      margin: 0 auto 0 auto;
+        padding: 3px 0 2px 0;
+      
+  }

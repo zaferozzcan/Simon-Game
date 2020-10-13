@@ -1,3 +1,4 @@
+
 // alert("JS IS ON")
 // console.log(typeof $());
 
@@ -10,13 +11,7 @@ $(() => {
                 $(e.target).fadeOut(100).fadeIn(100);
                 gameStuff.userGuessSeq.push($(e.target).eq(0)[0].classList[1])
                 console.log("user move array", gameStuff.userGuessSeq)
-                // if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
-                //     gameStuff.gameFunctions.isGameOver() //checking is game over
-                // }
-                if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
-                    gameStuff.gameFunctions.isGameOver()
-                }
-
+                gameStuff.gameFunctions.isGameOver()
             },
             seqEffect: (button) => {
                 $(button).fadeOut(100).fadeIn(100); //referenced from https://stackoverflow.com/questions/16344354/how-to-make-blinking-flashing-text-with-css-3
@@ -39,29 +34,28 @@ $(() => {
 
             },
             makeNewSeq: () => {
-                // if game is on 
                 setTimeout(() => {
-                    console.log(`Making new sequence in round  ${round}`);
-                    let randomButton = gameStuff.buttonArray[gameStuff.gameFunctions.createRandom()]
+                    gameStuff.userGuessSeq.length = 0;
+                    round++;
+                    $(".button-play").eq(0)[0].innerHTML = round;
+                    let randomButton = gameStuff.buttonArray[gameStuff.gameFunctions.createRandom()];
                     gameStuff.gameFunctions.seqEffect(`.${randomButton}`);
-                    gameStuff.gameSeqArray.push(randomButton)
-                    console.log("random sequence", gameStuff.gameSeqArray);
-                    // $(".button").on("click", gameStuff.gameFunctions.userClick);//  user move / click
-                    gameStuff.userGuessSeq.length = 0
+                    gameStuff.gameSeqArray.push(randomButton);
                 }, 2000)
 
             },
             isGameOver: () => {
-                console.log("In isGameOver");
-                if (gameStuff.userGuessSeq[round - 1] === gameStuff.gameSeqArray[round - 1]) {
-                    console.log("the last added is a match");
-                    round++;
-                    $(".button-play").eq(0)[0].innerHTML = round;
-                    gameStuff.gameFunctions.makeNewSeq()
+                if (gameStuff.gameSeqArray[gameStuff.userGuessSeq.length - 1] === gameStuff.userGuessSeq[gameStuff.userGuessSeq.length - 1]) {
+                    if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
+                        setTimeout(() => {
+                            gameStuff.gameFunctions.makeNewSeq();
+                        }, 2000);
+                    }
                 } else {
-                    console.log("game over");
+                    console.log("game over!");
                     $("#circle").remove()
                     $("#container").prepend(`<img  class="game-over" src="./images/download.png">`)
+
                 }
             }
         },
@@ -82,40 +76,11 @@ $(() => {
         $(".button-play").eq(0)[0].innerHTML = round
         if (gameStart) {
             gameStuff.gameFunctions.startGame();//user see seq
-            // console.log("gameSeq array", gameStuff.gameSeqArray);
         }
     });
 
-
-
-    // end jq ready method\\
 });
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// progressBar: () => {
-//     var time = 10; // reference from  http://vaidehijoshi.github.io/blog/2015/01/06/the-final-countdown-using-javascripts-setinterval-plus-clearinterval-methods/
-//     setInterval(function () {
-//         $(".play").eq(0)[0].innerHTML = time;
-//         time--
-//         if (time === 0) {
-//             console.log("Game is Over!!")
-//             $("body").css("background-color");
-//         }
-//     }, 1000);
-// }
