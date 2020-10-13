@@ -17,11 +17,15 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
+
+
+  
 
 #container-items{
     width: 550px;
-    height: 550px;
+    height: 500px;
     background-color: ivory;
     display: flex;
     flex-direction: row;
@@ -127,25 +131,31 @@ body{
 
 
   .game-over{
-    height: 30%;
-    width: 50%;
-   
+    height: 300px;
+    width: 550px;
+    
   }
 
   progress{
       display:flex;
+
       width: 550px;
-      margin: 0 auto 0 auto;
+      margin: 15px auto 0 auto;
+      
   }
 
-  .progress-show{
-    display: inline-block;
-  }
-  
+
   .progress-container{
-      background-color: ivory;
+      display: none;
+      background-color: indigo;
       width: 550px;
       margin: 0 auto 0 auto;
-        padding: 3px 0 2px 0;
+      padding: 3px 0 2px 0;
       
+  }
+
+  .time-check{
+      display: inline-block;
+      margin: 10px auto 10px auto;
+      color: white;
   }
