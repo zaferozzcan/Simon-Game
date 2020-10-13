@@ -13,7 +13,10 @@ $(() => {
                 // if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
                 //     gameStuff.gameFunctions.isGameOver() //checking is game over
                 // }
-                gameStuff.gameFunctions.isGameOver()
+                if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
+                    gameStuff.gameFunctions.isGameOver()
+                }
+
             },
             seqEffect: (button) => {
                 $(button).fadeOut(100).fadeIn(100); //referenced from https://stackoverflow.com/questions/16344354/how-to-make-blinking-flashing-text-with-css-3
@@ -59,10 +62,7 @@ $(() => {
                     console.log("game over");
                     $("#circle").remove()
                     $("#container").prepend(`<img  class="game-over" src="./images/download.png">`)
-
                 }
-
-                // }
             }
         },
         buttonArray: ["top-right", "top-left", "bottom-left", "bottom-right"],
