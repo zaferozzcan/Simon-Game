@@ -1,11 +1,10 @@
-
 // alert("JS IS ON")
 // console.log(typeof $());
 
 
 $(() => {
 
-    let gameStuff = {
+    var gameStuff = {
         gameFunctions: {
             userClick: (e) => {
 
@@ -14,18 +13,17 @@ $(() => {
                 console.log("user move array", gameStuff.userGuessSeq)
 
                 //click sound 
-                // gameStuff.gameFunctions.makeSound($(e.target).eq(0)[0].classList[1]);
-                var sound = new Audio(`./sounds/${$(e.target).eq(0)[0].classList[1]}.mp3`)
-                sound.play()
+                gameStuff.gameFunctions.makeSound($(e.target).eq(0)[0].classList[1]);
+
 
                 gameStuff.gameFunctions.isGameOver()
             },
             seqEffect: (button) => {
                 $(button).fadeOut(100).fadeIn(100); //referenced from https://stackoverflow.com/questions/16344354/how-to-make-blinking-flashing-text-with-css-3
             },
-            makeSound: (buttonName) => {
+            makeSound: (buttonName) => { //referenced from https://stackoverflow.com/questions/9419263/how-to-play-audio
                 const soundUrl = `sounds/${buttonName}.mp3`
-                var sound = new Audio()
+                var sound = new Audio(soundUrl)
                 sound.play()
             },
             createRandom: () => {
@@ -40,15 +38,13 @@ $(() => {
                     gameStuff.gameFunctions.seqEffect(`.${randomButton}`);
                     console.log(randomButton)
                     //sound
-                    // gameStuff.gameFunctions.makeSound(randomButton)
-                    var sound = new Audio(`./sounds/${randomButton}.mp3`)
-                    sound.play()
+                    gameStuff.gameFunctions.makeSound(randomButton)
 
                     gameStuff.gameSeqArray.push(randomButton)
                     console.log("random sequence", gameStuff.gameSeqArray);
                     $(".button").on("click", gameStuff.gameFunctions.userClick);//  user move / click
                     /// after 
-                }, 2000)
+                }, 1500)
 
             },
             makeNewSeq: () => {
@@ -60,12 +56,11 @@ $(() => {
                     gameStuff.gameFunctions.seqEffect(`.${randomButton}`);
 
                     //sound 
-                    // gameStuff.gameFunctions.makeSound(randomButton)
-                    var sound = new Audio(`./sounds/${randomButton}.mp3`)
-                    sound.play()
+                    gameStuff.gameFunctions.makeSound(randomButton)
+
 
                     gameStuff.gameSeqArray.push(randomButton);
-                }, 2000)
+                }, 1500)
 
             },
             isGameOver: () => {
@@ -73,7 +68,7 @@ $(() => {
                     if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
                         setTimeout(() => {
                             gameStuff.gameFunctions.makeNewSeq();
-                        }, 2000);
+                        }, 1500);
                     }
                 } else {
                     console.log("game over!");
@@ -81,15 +76,11 @@ $(() => {
                     var sound = new Audio(`./sounds/game-over.mp3`)
                     sound.play()
 
-                    $("#circle").css("display", "none");
-                    $(".game-over").remove();
-                    $("#container").prepend(`<img  class="game-over" src="./images/download.png">`);
-                    $(".progress-container").css("display", "flex");
-                    let time = 1;
-                    $(".progress-container").append(`<p class="time-check">New Game is Loading...</p>`);
+                    gameStuff.gameFunctions.afterGameOver()
 
                     //progress
-                    setInterval(() => {
+                    let time = 1;
+                    setInterval(() => {   // referenced from https://www.tutorialrepublic.com/html-reference/html5-progress-tag.php
                         time += 1
                         $("progress").attr("value", time)
                     }, 1000);
@@ -103,13 +94,18 @@ $(() => {
 
                     }, 10000);
 
-                    gameStuff.userGuessSeq.length = 0;
                     gameStuff.gameSeqArray.length = 0;
                     gameStart = false;
-                    round = 0;
+                    round = 1;
                 }
-
-
+            },
+            afterGameOver: () => {
+                $("#circle").css("display", "none");
+                $(".game-over").remove();
+                $(".modal-buttons").remove();
+                $("#container").prepend(`<img  class="game-over" src="./images/download.png">`);
+                $(".progress-container").css("display", "flex");
+                $(".progress-container").append(`<p class="time-check">New Game is Loading...</p>`);
             }
         },
         buttonArray: ["top-right", "top-left", "bottom-left", "bottom-right"],
@@ -120,18 +116,32 @@ $(() => {
 
     var gameStart = false;
     var round = 1
-
     // START GAME
-    if (!gameStart) {
-        $((".button-play")).on("click", () => {
-            gameStart = true
+    $((".button-play")).on("click", () => {
+        if (!gameStart) {
+            gameStart = true;
             $(".small-circle").removeClass().addClass("small-circle-play");
             $(".button-play").eq(0)[0].innerHTML = round
-            if (gameStart) {
-                gameStuff.gameFunctions.startGame();//user see seq
-            }
-        });
-    }
+            gameStuff.gameFunctions.startGame();
+        }
+
+    });
+
+
+    $(".modal-buttons").click(function () {
+        $(".modal-buttons").css("display", "none");
+        $(".modal").css("display", "block");
+        $("#container-items").css("display", "none");
+
+    })
+
+    $("span").click(function () {
+        $(".modal").css("display", "none");
+        $(".modal-buttons").css("display", "block");
+        $("#container-items").css("display", "flex");
+    })
+
+
 
 
 });
