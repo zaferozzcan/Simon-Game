@@ -15,7 +15,6 @@ $(() => {
                 //click sound 
                 gameStuff.gameFunctions.makeSound($(e.target).eq(0)[0].classList[1]);
 
-
                 gameStuff.gameFunctions.isGameOver()
             },
             seqEffect: (button) => {
@@ -100,9 +99,6 @@ $(() => {
                         $(".button-play").eq(0)[0].innerHTML = "PLAY"
                     }, 5000);
 
-                    if (round > higestScore) {
-                        higestScore = round
-                    }
 
                     gameStuff.gameSeqArray.length = 0;
                     gameStuff.userGuessSeq.length = 0;
