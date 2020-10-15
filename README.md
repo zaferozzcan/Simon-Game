@@ -11,4 +11,4 @@
 
 # Tool & Technologies
 
-### HTML, CSS, JavaScript, jQuery, flexbox
+### HTML, CSS, JavaScript, jQuery
