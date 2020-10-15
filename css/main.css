@@ -179,15 +179,16 @@ body{
     color: ivory;
     
 }
-#openModal:focus{
-    outline:none;
+#openModal:hover{
+    background-color: ivory;
+    color: black;
 }
 .modal{
    width:50vw;
    background-color: ivory;
    border-radius: 5%;
    margin: 10% auto 0px;
-   padding:1rem;
+   padding:.5rem;
    display: none;
 }
 .modal-header{
