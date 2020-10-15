@@ -89,14 +89,20 @@ $(() => {
                             clearInterval()
                         }
                     }, 1000);
-
+                    $("#container").append($(`<h1 class="score">Your score: ${round}</h1>`))
+                    $("#container").append($(`<h1 class="score">Highest score: ${higestScore <= round ? round : higestScore}</h1>`))
                     setTimeout(() => {
                         $(".progress-container").remove();
+                        $(".score").remove()
                         $(".game-over").remove();
                         $("#circle").css("display", "flex")
                         $(".small-circle-play").removeClass().addClass("small-circle")
                         $(".button-play").eq(0)[0].innerHTML = "PLAY"
                     }, 5000);
+
+                    if (round > higestScore) {
+                        higestScore = round
+                    }
 
                     gameStuff.gameSeqArray.length = 0;
                     gameStuff.userGuessSeq.length = 0;
@@ -120,9 +126,11 @@ $(() => {
     $(".button").on("click", gameStuff.gameFunctions.userClick);//  user move / click
     var gameStart = false;
     var round = 1
+    var higestScore = 0
     // START GAME
     $((".button-play")).on("click", () => {
         if (!gameStart) {
+            $()
             gameStart = true;
             gameStuff.gameSeqArray.length = 0;
             round = 1
@@ -146,9 +154,6 @@ $(() => {
         $(".modal-buttons").css("display", "block");
         $("#container-items").css("display", "flex");
     })
-
-
-
 
 });
 

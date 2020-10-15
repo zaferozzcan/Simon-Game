@@ -1,7 +1,7 @@
 
 /* general css */
 body{
-    background-color: indigo;
+    background-color: rgb(160, 96, 206);
 }
 
 #container{
@@ -12,7 +12,6 @@ body{
 
 
 /* buttons */
-
 #circle{
     display: flex;
     justify-content: center;
@@ -20,7 +19,7 @@ body{
 }
 
 
-  
+
 
 #container-items{
     width: 550px;
@@ -138,7 +137,6 @@ body{
 
   progress{
       display:flex;
-
       width: 550px;
       margin: 15px auto 0 auto;
       
@@ -147,7 +145,7 @@ body{
 
   .progress-container{
       display: none;
-      background-color: indigo;
+      background-color: transparent;
       width: 550px;
       margin: 0 auto 0 auto;
       padding: 3px 0 2px 0;
@@ -179,6 +177,7 @@ body{
     margin-left:48.7%;   
     background-color: black;
     color: ivory;
+    
 }
 #openModal:focus{
     outline:none;
@@ -202,8 +201,43 @@ body{
     font-weight: 600;
     font-size: 1.1rem;
     cursor: pointer;
+    display: flex;
+   
 }
 .modal-body>p{
     line-height: 1.5rem;
     margin-top:1rem;
 }
+
+
+.score{
+    margin-top: 50px;
+    display: block;
+   color:black;
+}
+
+ @media all and (max-width:450px){
+    #container-items{
+        width: 350px;
+        height: 300px;
+        background-color: ivory;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        border: 5px solid;
+        margin-top:15px ;
+        border-radius: 10%;
+    }
+
+    .button{
+        height: 120px;
+        width: 120px;
+    }
+
+    #container{
+        margin-top:120px;
+    }
+
+    
+    }
