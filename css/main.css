@@ -16,8 +16,7 @@ body{
 #circle{
     display: flex;
     justify-content: center;
-    align-items: center;
-    
+    align-items: center; 
 }
 
 
@@ -33,6 +32,7 @@ body{
     align-items: center;
     border: 5px solid;
     margin-top:15px ;
+    border-radius: 10%;
 }
 
 

@@ -32,8 +32,8 @@ $(() => {
             },
             startGame: () => {
                 setTimeout(() => {
-                    console.log("game starts");
-                    console.log(`round:${round}`);
+                    // console.log("game starts");
+                    // console.log(`round:${round}`);
                     let randomButton = gameStuff.buttonArray[gameStuff.gameFunctions.createRandom()]
                     gameStuff.gameFunctions.seqEffect(`.${randomButton}`);
                     console.log(randomButton)
@@ -42,9 +42,9 @@ $(() => {
 
                     gameStuff.gameSeqArray.push(randomButton)
                     console.log("random sequence", gameStuff.gameSeqArray);
-                    $(".button").on("click", gameStuff.gameFunctions.userClick);//  user move / click
-                    /// after 
-                }, 1500)
+
+
+                }, 500)
 
             },
             makeNewSeq: () => {
@@ -58,17 +58,20 @@ $(() => {
                     //sound 
                     gameStuff.gameFunctions.makeSound(randomButton)
 
-
                     gameStuff.gameSeqArray.push(randomButton);
-                }, 1500)
+                    console.log("random seq array", gameStuff.gameSeqArray)
+                }, 500)
 
             },
             isGameOver: () => {
+                console.log("in is game over");
                 if (gameStuff.gameSeqArray[gameStuff.userGuessSeq.length - 1] === gameStuff.userGuessSeq[gameStuff.userGuessSeq.length - 1]) {
+                    console.log("in first check");
                     if (gameStuff.userGuessSeq.length === gameStuff.gameSeqArray.length) {
+                        console.log(" in second check ");
                         setTimeout(() => {
                             gameStuff.gameFunctions.makeNewSeq();
-                        }, 1500);
+                        }, 0);
                     }
                 } else {
                     console.log("game over!");
@@ -77,12 +80,14 @@ $(() => {
                     sound.play()
 
                     gameStuff.gameFunctions.afterGameOver()
-
                     //progress
                     let time = 1;
                     setInterval(() => {   // referenced from https://www.tutorialrepublic.com/html-reference/html5-progress-tag.php
-                        time += 1
+                        time += 2
                         $("progress").attr("value", time)
+                        if (time >= 10) {
+                            clearInterval()
+                        }
                     }, 1000);
 
                     setTimeout(() => {
@@ -91,10 +96,10 @@ $(() => {
                         $("#circle").css("display", "flex")
                         $(".small-circle-play").removeClass().addClass("small-circle")
                         $(".button-play").eq(0)[0].innerHTML = "PLAY"
-
-                    }, 10000);
+                    }, 5000);
 
                     gameStuff.gameSeqArray.length = 0;
+                    gameStuff.userGuessSeq.length = 0;
                     gameStart = false;
                     round = 1;
                 }
@@ -112,14 +117,15 @@ $(() => {
         gameSeqArray: [],
         userGuessSeq: [],
     }
-
-
+    $(".button").on("click", gameStuff.gameFunctions.userClick);//  user move / click
     var gameStart = false;
     var round = 1
     // START GAME
     $((".button-play")).on("click", () => {
         if (!gameStart) {
             gameStart = true;
+            gameStuff.gameSeqArray.length = 0;
+            round = 1
             $(".small-circle").removeClass().addClass("small-circle-play");
             $(".button-play").eq(0)[0].innerHTML = round
             gameStuff.gameFunctions.startGame();
@@ -128,7 +134,7 @@ $(() => {
     });
 
 
-    $(".modal-buttons").click(function () {
+    $(".modal-buttons").click(function () {  ///   referenced from https://git.generalassemb.ly/seir-9-21/student-resources/tree/master/1_front_end_development/w03d02/morning_exercise
         $(".modal-buttons").css("display", "none");
         $(".modal").css("display", "block");
         $("#container-items").css("display", "none");
