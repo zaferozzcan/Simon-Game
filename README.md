@@ -1,6 +1,6 @@
 # Simon Game 
 
- https://zaferozzcan.github.io/simon-game/
+ to play the game:  https://zaferozzcan.github.io/simon-game/
 
 <p>Press the PLAY button. App will give the first signal. Repeat the signal by pressing the same
                     color of button</p>
